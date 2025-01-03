@@ -25,11 +25,11 @@ const addSubmitListener = () => {
     // Prevent submit button from refreshing the page
     event.preventDefault();
 
-    const ramenName = event.target.name.value;
-    const ramenRestaurant = event.target.restaurant.value;
-    const ramenImage = event.target.image.value;
-    const ramenRating = event.target.rating.value;
-    const ramenComment = event.target.comment.value;
+    const ramenName = event.target.name.value.trim();
+    const ramenRestaurant = event.target.restaurant.value.trim();
+    const ramenImage = event.target.image.value.trim();
+    const ramenRating = event.target.rating.value.trim();
+    const ramenComment = event.target['new-comment'].value.trim();
 
     // Create object for new data
     const newRamen = {
