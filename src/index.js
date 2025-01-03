@@ -32,7 +32,7 @@ const addSubmitListener = () => {
     const ramenComment = event.target.comment.value;
 
     // Create object for new data
-    const ramenData = {
+    const newRamen = {
       name: ramenName,
       restaurant: ramenRestaurant,
       image: ramenImage,
@@ -40,46 +40,15 @@ const addSubmitListener = () => {
       comment: ramenComment,
     };
 
-    // Send a POST request to server
-    fetch('http://localhost:3000/ramens', {
-      method: 'POST',
-      headers:
-      {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
-      body: JSON.stringify(ramenData),
-    })
-      .then(response => response.json())
-      .then(newRamen => {
-        const ramenMenu = document.getElementById('ramen-menu');
+    const ramenMenu = document.getElementById('ramen-menu');
+    const ramenImageElement = document.createElement('img');
+    ramenImageElement.src = newRamen.image;
 
-        const card = document.createElement('div');
-        card.classList.add('card');
+    ramenImageElement.addEventListener('click', () => handleClick(newRamen));
 
-        const img = document.createElement('img');
-        img.src = newRamen.image;
-        img.classList.add('detail-image');
+    ramenMenu.appendChild(ramenImageElement);
 
-        const h2 = document.createElement('h2');
-        h2.textContent = newRamen.name;
-
-        const h3 = document.createElement('h3');
-        h3.textContent = newRamen.restaurant;
-
-        const span = document.createElement('span');
-        span.textContent = newRamen.rating;
-
-        const p = document.createElement('p');
-        p.textContent = newRamen.comment;
-
-        card.append(img, h2, h3, span, p);
-
-        ramenMenu.appendChild(card);
-
-        newRamenForm.reset();
-      })
-
+    newRamenForm.reset();
   })
 
 }
@@ -102,7 +71,7 @@ const displayRamens = () => {
 
         // Add click event for each unique ramen image
         ramenImage.addEventListener('click', () => handleClick(ramen));
-        
+
         // Append img elmenet to the ramen-menu div
         ramenMenu.appendChild(ramenImage);
       });
